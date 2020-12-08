@@ -1,13 +1,12 @@
 package com.imglicense.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -15,29 +14,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-// @PropertySource("classpath:application.properties")      TODO delete
-
-
-@Component
-
 @Repository
 public class TennisLicenseRepository {
 
-    int CUSTOMER_ID = 0;
-    int MATCH_ID = 1;
-    int START_DATE = 2;
-    int PLAYER_A = 3;
-    int PLAYER_B = 4;
+    private final int CUSTOMER_ID = 0;
+    private final int MATCH_ID = 1;
+    private final int START_DATE = 2;
+    private final int PLAYER_A = 3;
+    private final int PLAYER_B = 4;
 
+    // TODO refactor
     public String getLicense(String customerId) throws IOException {
-        Path path = Paths.get(getFilename());
-        byte[] bytes = Files.readAllBytes(path);
-        String fileContent = new String(bytes);
-        String[] fileLines = fileContent.split("\n");
+        String[] fileLines = readDataFile();
         List<TennisLicense> tennisLicenses = new ArrayList<>();
         for (String line : fileLines) {
             String[] tokens = line.split(",");
-            // TODO put these numbers in a properties file
             if (tokens[CUSTOMER_ID].equals(customerId)) {
                 TennisLicense tl1 = new TennisLicense();
                 tl1.matchId = tokens[MATCH_ID];
@@ -47,22 +38,14 @@ public class TennisLicenseRepository {
                 tennisLicenses.add(tl1);
             }
         }
-        // TODO use builder
-        TennisLicense[] tennisLicenseArray = tennisLicenses.toArray(new TennisLicense[0]);
-        TennisLicenses tls = new TennisLicenses(tennisLicenseArray);
-        ObjectMapper om = new ObjectMapper();
-        return om.writeValueAsString(tls);
+        return getLicences(tennisLicenses);
     }
 
     public String getLicenseShortSummary(String customerId) throws IOException {
-        Path path = Paths.get(getFilename());
-        byte[] bytes = Files.readAllBytes(path);
-        String fileContent = new String(bytes);
-        String[] fileLines = fileContent.split("\n");
+        String[] fileLines = readDataFile();
         List<TennisLicense> tennisLicenses = new ArrayList<>();
         for (String line : fileLines) {
             String[] tokens = line.split(",");
-            // TODO put these numbers in a properties file
             if (tokens[CUSTOMER_ID].equals(customerId)) {
                 TennisLicense tl1 = new TennisLicense();
                 tl1.matchId = tokens[MATCH_ID];
@@ -73,23 +56,14 @@ public class TennisLicenseRepository {
                 tennisLicenses.add(tl1);
             }
         }
-        // TODO use builder
-        TennisLicense[] tennisLicenseArray = tennisLicenses.toArray(new TennisLicense[0]);
-        TennisLicenses tls = new TennisLicenses(tennisLicenseArray);
-        ObjectMapper om = new ObjectMapper();
-        return om.writeValueAsString(tls);
+        return getLicences(tennisLicenses);
     }
 
     public String getLicenseLongSummary(String customerId) throws IOException {
-        // TODO refactor
-        Path path = Paths.get(getFilename());
-        byte[] bytes = Files.readAllBytes(path);
-        String fileContent = new String(bytes);
-        String[] fileLines = fileContent.split("\n");
+        String[] fileLines = readDataFile();
         List<TennisLicense> tennisLicenses = new ArrayList<>();
         for (String line : fileLines) {
             String[] tokens = line.split(",");
-            // TODO put these numbers in a properties file
             if (tokens[CUSTOMER_ID].equals(customerId)) {
                 TennisLicense tl1 = new TennisLicense();
                 tl1.matchId = tokens[MATCH_ID];
@@ -106,11 +80,7 @@ public class TennisLicenseRepository {
                 tennisLicenses.add(tl1);
             }
         }
-        // TODO use builder
-        TennisLicense[] tennisLicenseArray = tennisLicenses.toArray(new TennisLicense[0]);
-        TennisLicenses tls = new TennisLicenses(tennisLicenseArray);
-        ObjectMapper om = new ObjectMapper();
-        return om.writeValueAsString(tls);
+        return getLicences(tennisLicenses);
     }
 
     public String getMinsInPast(String dateString) {
@@ -123,6 +93,20 @@ public class TennisLicenseRepository {
         long minsInPast = duration / 60;
         String minsInPastString = String.valueOf(minsInPast);
         return minsInPastString;
+    }
+
+    private String getLicences(List<TennisLicense> tennisLicenses) throws JsonProcessingException {
+        TennisLicense[] tennisLicenseArray = tennisLicenses.toArray(new TennisLicense[0]);
+        TennisLicenses tls = new TennisLicenses(tennisLicenseArray);
+        ObjectMapper om = new ObjectMapper();
+        String s = om.writeValueAsString(tls);
+        return s;
+    }
+
+    private String[] readDataFile() throws IOException {
+        byte[] bytes = Files.readAllBytes(Paths.get(getFilename()));
+        String fileContent = new String(bytes);
+        return fileContent.split("\n");
     }
 
     @Value("${tennis.datafile}")

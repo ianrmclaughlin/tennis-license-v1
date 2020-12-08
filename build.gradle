@@ -4,8 +4,7 @@ plugins {
     id 'java'
 }
 
-//TODO correct name
-group 'org.example'
+group 'com.imglicence'
 version '1.0-SNAPSHOT'
 
 repositories {
