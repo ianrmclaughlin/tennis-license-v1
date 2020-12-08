@@ -1,6 +1,6 @@
-package com.imglicense;
+package com.imglicense.repository;
 
-public class JsonLicense {
+public class TennisLicense {
     public String matchId;
     public String startDate;
     public String playerA;

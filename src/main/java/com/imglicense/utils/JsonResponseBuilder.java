@@ -1,4 +1,4 @@
-package com.imglicense;
+package com.imglicense.utils;
 
 import java.util.ArrayList;
 import java.util.List;

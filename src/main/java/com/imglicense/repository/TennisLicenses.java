@@ -1,4 +1,4 @@
-package com.imglicense;
+package com.imglicense.repository;
 
 public class TennisLicenses {
     public TennisLicense[] licenses;

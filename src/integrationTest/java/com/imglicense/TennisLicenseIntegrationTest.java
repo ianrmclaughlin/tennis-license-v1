@@ -1,6 +1,7 @@
 package com.imglicense;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imglicense.utils.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;

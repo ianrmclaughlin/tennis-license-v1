@@ -1,4 +1,4 @@
-package com.imglicense;
+package com.imglicense.utils;
 
 public class TennisDataBuilder {
 

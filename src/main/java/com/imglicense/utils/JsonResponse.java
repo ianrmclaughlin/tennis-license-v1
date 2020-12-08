@@ -1,11 +1,13 @@
-package com.imglicense;
+package com.imglicense.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imglicense.utils.JsonLicense;
+import com.imglicense.utils.LicensesWrapper;
 
 public class JsonResponse {
     private JsonLicense[] licenses;
-    JsonResponse(JsonLicense[] jl){
+    public JsonResponse(JsonLicense[] jl){
         licenses = jl;
     }
     public String toString(){

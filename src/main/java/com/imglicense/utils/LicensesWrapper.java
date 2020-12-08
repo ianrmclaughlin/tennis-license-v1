@@ -1,4 +1,6 @@
-package com.imglicense;
+package com.imglicense.utils;
+
+import com.imglicense.utils.JsonLicense;
 
 public class LicensesWrapper {
     public JsonLicense[] licenses;

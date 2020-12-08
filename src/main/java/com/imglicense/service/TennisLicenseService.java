@@ -1,7 +1,7 @@
-package com.imglicense;
+package com.imglicense.service;
 
+import com.imglicense.repository.TennisLicenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

@@ -1,6 +1,8 @@
 package com.imglicense;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imglicense.repository.TennisLicenseRepository;
+import com.imglicense.utils.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.stereotype.Component;
@@ -9,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
