@@ -90,16 +90,14 @@ public class TennisLicenseRepository {
         long nowSeconds = ldt2.toEpochSecond(ZoneOffset.UTC);
         long duration = nowSeconds - dateStringSeconds;
         long minsInPast = duration / 60;
-        String minsInPastString = String.valueOf(minsInPast);
-        return minsInPastString;
+        return String.valueOf(minsInPast);
     }
 
     private String getLicences(List<TennisLicense> tennisLicenses) throws JsonProcessingException {
         TennisLicense[] tennisLicenseArray = tennisLicenses.toArray(new TennisLicense[0]);
         TennisLicenses tls = new TennisLicenses(tennisLicenseArray);
         ObjectMapper om = new ObjectMapper();
-        String s = om.writeValueAsString(tls);
-        return s;
+        return om.writeValueAsString(tls);
     }
 
     private String[] readDataFile() throws IOException {

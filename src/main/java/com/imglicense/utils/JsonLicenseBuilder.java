@@ -41,8 +41,6 @@ public class JsonLicenseBuilder {
         jl.playerB = playerB;
         jl.summary = summary;
         return jl;
-
-
     }
 
 }

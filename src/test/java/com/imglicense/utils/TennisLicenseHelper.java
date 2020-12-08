@@ -52,8 +52,7 @@ public class TennisLicenseHelper {
         JsonResponse jsonResponse = jsonResponseBuilder
                 .withLicense(jsonLicense)
                 .build();
-        String expectedResponse = jsonResponse.toString();
-        return expectedResponse;
+        return jsonResponse.toString();
     }
 
     public String createTestResponseSingleLicenseShortSummary() {
@@ -69,8 +68,7 @@ public class TennisLicenseHelper {
         JsonResponse jsonResponse = jsonResponseBuilder
                 .withLicense(jsonLicense)
                 .build();
-        String expectedResponse = jsonResponse.toString();
-        return expectedResponse;
+        return jsonResponse.toString();
     }
 
     public String createTestResponseSingleLicenseLongSummary() {
@@ -86,8 +84,7 @@ public class TennisLicenseHelper {
         JsonResponse jsonResponse = jsonResponseBuilder
                 .withLicense(jsonLicense)
                 .build();
-        String expectedResponse = jsonResponse.toString();
-        return expectedResponse;
+        return jsonResponse.toString();
     }
 
     @Value("${tennis.datafile}")

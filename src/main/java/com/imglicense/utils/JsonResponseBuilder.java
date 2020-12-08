@@ -14,7 +14,6 @@ public class JsonResponseBuilder {
 
     public JsonResponse build() {
         JsonLicense[] jsonLicenseArray = jsonLicenses.toArray(new JsonLicense[0]);
-        JsonResponse jsonResponse = new JsonResponse(jsonLicenseArray);
-        return jsonResponse;
+        return new JsonResponse(jsonLicenseArray);
     }
 }

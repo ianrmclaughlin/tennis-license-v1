@@ -1,7 +1,6 @@
 package com.imglicense.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imglicense.repository.TennisLicenseRepository;
 import com.imglicense.utils.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -113,6 +112,7 @@ public class TennisLicenseRepositoryTest {
         ObjectMapper om = new ObjectMapper();
         Assert.assertEquals(om.readTree(expResponse), om.readTree(licenses));
     }
+
     @Test
     public void givenTwoCustomerIds_whenGet_thenGetMultipleTennisLicenses() throws IOException {
 
@@ -268,9 +268,9 @@ public class TennisLicenseRepositoryTest {
 
         // then
         ObjectMapper om = new ObjectMapper();
-        Map<String,Object> mso1 = om.readValue ( licenses, Map.class );
-        List<Map<String,Object>> list = (List<Map<String, Object>>) mso1.get ( "licenses" );
-        Map<String,Object> mso2 = (Map<String,Object>)list.get(0);
+        Map<String, Object> mso1 = om.readValue(licenses, Map.class);
+        List<Map<String, Object>> list = (List<Map<String, Object>>) mso1.get("licenses");
+        Map<String, Object> mso2 = list.get(0);
         String summaryString = (String) mso2.get("summary");
 
         Assert.assertTrue("verify summary string is correct", summaryString.matches("Djokovic vs Nadal started 11[0-9][0-9][0-9][0-9][0-9][0-9] minutes ago"));
@@ -288,9 +288,9 @@ public class TennisLicenseRepositoryTest {
 
         // then
         ObjectMapper om = new ObjectMapper();
-        Map<String,Object> mso1 = om.readValue ( licenses, Map.class );
-        List<Map<String,Object>> list = (List<Map<String, Object>>) mso1.get ( "licenses" );
-        Map<String,Object> mso2 = (Map<String,Object>)list.get(0);
+        Map<String, Object> mso1 = om.readValue(licenses, Map.class);
+        List<Map<String, Object>> list = (List<Map<String, Object>>) mso1.get("licenses");
+        Map<String, Object> mso2 = list.get(0);
         String summaryString = (String) mso2.get("summary");
 
         Assert.assertTrue(
@@ -299,7 +299,7 @@ public class TennisLicenseRepositoryTest {
     }
 
     @Test
-    public void givenDate_whenCalculateMins_thenMinsInPast() throws IOException {
+    public void givenDate_whenCalculateMins_thenMinsInPast() {
 
         TennisLicenseRepository tennisLicenseRepository = new TennisLicenseRepository();
 
@@ -314,8 +314,9 @@ public class TennisLicenseRepositoryTest {
                 "minutesString=" + minutesString,
                 minutesString.matches("11[0-9][0-9][0-9][0-9][0-9][0-9]"));
     }
+
     @Test
-    public void givenDate_whenCalculateMins_thenMinsInFuture() throws IOException {
+    public void givenDate_whenCalculateMins_thenMinsInFuture() {
 
         TennisLicenseRepository tennisLicenseRepository = new TennisLicenseRepository();
 

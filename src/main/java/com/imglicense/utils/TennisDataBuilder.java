@@ -33,7 +33,6 @@ public class TennisDataBuilder {
     }
 
     public TennisData build() {
-        // TODO investigate intellij highlighted issues
         TennisData tennisData = new TennisData();
         TennisData.customerId = customerId;
         TennisData.matchId = matchId;

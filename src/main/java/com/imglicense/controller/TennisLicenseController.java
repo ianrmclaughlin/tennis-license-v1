@@ -15,32 +15,22 @@ public class TennisLicenseController {
     @Autowired
     TennisLicenseService tennisLicenseService;
 
-//    @GetMapping("/licenses/{customerId}")
-//    String controllerMethod(@PathVariable String customerId) throws IOException {
-//        return tennisLicenseService.getLicense(customerId);
-//    }
-
-//    @GetMapping("/licenses/{customerId}")
-//    String controllerMethod1(@PathVariable String customerId) throws IOException {
-//        return tennisLicenseService.getLicense(customerId);
-//    }
-
     @GetMapping("/licenses/{customerId}")
-    String controllerMethod2(
+    String licencesCustomerId(
             @PathVariable("customerId") String customerId,
             @RequestParam(value = "summary", required = false) String summary) throws IOException {
 
-        String licenseShortSummary;
+        String license;
         if (summary == null) {
-            licenseShortSummary = tennisLicenseService.getLicense(customerId);
+            license = tennisLicenseService.getLicense(customerId);
         } else if (summary.equals("AvB")) {
-            licenseShortSummary = tennisLicenseService.getLicenseShortSummary(customerId);
+            license = tennisLicenseService.getLicenseShortSummary(customerId);
         } else if (summary.equals("AvBTime")) {
-            licenseShortSummary = tennisLicenseService.getLicenseLongSummary(customerId);
+            license = tennisLicenseService.getLicenseLongSummary(customerId);
         } else {
-            licenseShortSummary = null;
+            license = null;
         }
-        return licenseShortSummary;
+        return license;
     }
 }
 
