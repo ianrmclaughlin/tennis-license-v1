@@ -120,8 +120,7 @@ public class TennisLicenseIntegrationTest {
                 summaryString.matches("Djokovic vs Nadal starts in 41[0-9][0-9][0-9][0-9][0-9][0-9] minutes"));
     }
 
-    // TODO make private
-    public static void createTestFileSingleRecord() throws IOException {
+    private static void createTestFileSingleRecord() throws IOException {
         TennisDataBuilder tennisDataBuilder = new TennisDataBuilder();
         TennisData tennisData = tennisDataBuilder
                 .withCustomerId("123")
@@ -132,8 +131,7 @@ public class TennisLicenseIntegrationTest {
                 .build();
         String fileContent = tennisData.toString();
         byte[] bytes = fileContent.getBytes();
-//      Path path = Paths.get("C:\\IanMcLaughlin\\tennis-data-file.csv"); // TODO remove
-        Path path = Paths.get("src/main/resources/tennis-data-file.csv"); // TODO remove
+        Path path = Paths.get("src/main/resources/tennis-data-file.csv");
         Files.write(path, bytes);
     }
 
@@ -148,7 +146,7 @@ public class TennisLicenseIntegrationTest {
                 .build();
         String fileContent = tennisData.toString();
         byte[] bytes = fileContent.getBytes();
-        Path path = Paths.get("src/main/resources/tennis-data-file.csv"); // TODO remove
+        Path path = Paths.get("src/main/resources/tennis-data-file.csv");
         Files.write(path, bytes);
     }
 

@@ -23,7 +23,6 @@ public class TennisLicenseRepository {
     private final int PLAYER_A = 3;
     private final int PLAYER_B = 4;
 
-    // TODO refactor
     public String getLicense(String customerId) throws IOException {
         String[] fileLines = readDataFile();
         List<TennisLicense> tennisLicenses = new ArrayList<>();
@@ -71,7 +70,7 @@ public class TennisLicenseRepository {
                 tl1.playerA = tokens[PLAYER_A];
                 tl1.playerB = tokens[PLAYER_B];
                 String minsInPast = getMinsInPast(tokens[START_DATE]);
-                if(minsInPast.startsWith("-")){
+                if (minsInPast.startsWith("-")) {
                     minsInPast = minsInPast.replace("-", "");
                     tl1.summary = tokens[PLAYER_A] + " vs " + tokens[PLAYER_B] + " starts in " + minsInPast + " minutes";
                 } else {
@@ -111,9 +110,10 @@ public class TennisLicenseRepository {
 
     @Value("${tennis.datafile}")
     String dataFile;
-    private String getFilename(){
+
+    private String getFilename() {
         String filename;
-        if (dataFile==null) {
+        if (dataFile == null) {
             filename = "src/main/resources/tennis-data-file.csv";
         } else {
             filename = dataFile;

@@ -1,5 +1,6 @@
-package com.imglicense;
+package com.imglicense.controller;
 
+import com.imglicense.utils.TennisLicenseHelper;
 import com.imglicense.service.TennisLicenseService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,13 +16,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static com.imglicense.TennisLicenseHelper.createTestResponseSingleLicense;
-import static com.imglicense.TennisLicenseHelper.createTestResponseSingleLicenseShortSummary;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TennisLicenseControllerTest {
+
+    TennisLicenseHelper tlh = new TennisLicenseHelper();
 
     @Autowired
     private MockMvc mockMvc;
@@ -34,7 +34,7 @@ public class TennisLicenseControllerTest {
 
         // Given
         String customerId = "123";
-        String expectedResponse = createTestResponseSingleLicense();
+        String expectedResponse = tlh.createTestResponseSingleLicense();
         MockitoAnnotations.initMocks(this);
         Mockito.when(tennisLicenseService.getLicense(customerId)).thenReturn(expectedResponse);
         MockHttpServletRequestBuilder mockBuilder = MockMvcRequestBuilders.get("/licenses/" + customerId);
@@ -45,8 +45,6 @@ public class TennisLicenseControllerTest {
         // then
         Assert.assertEquals(expectedResponse, responseString);
 
-        // TODO check status
-
     }
 
     @Test
@@ -54,7 +52,7 @@ public class TennisLicenseControllerTest {
 
         // Given
         String customerId = "123";
-        String expectedResponse = createTestResponseSingleLicenseShortSummary();
+        String expectedResponse = tlh.createTestResponseSingleLicenseShortSummary();
         MockitoAnnotations.initMocks(this);
         Mockito.when(tennisLicenseService.getLicenseShortSummary(customerId)).thenReturn(expectedResponse);
         MockHttpServletRequestBuilder mockBuilder = MockMvcRequestBuilders.get("/licenses/" + customerId + "?summary=AvB");
@@ -64,9 +62,6 @@ public class TennisLicenseControllerTest {
 
         // then
         Assert.assertEquals(expectedResponse, responseString);
-
-        // TODO check status
-
     }
 
     @Test
@@ -74,7 +69,7 @@ public class TennisLicenseControllerTest {
 
         // Given
         String customerId = "123";
-        String expectedResponse = createTestResponseSingleLicenseShortSummary();
+        String expectedResponse = tlh.createTestResponseSingleLicenseShortSummary();
         MockitoAnnotations.initMocks(this);
         Mockito.when(tennisLicenseService.getLicenseLongSummary(customerId)).thenReturn(expectedResponse);
         MockHttpServletRequestBuilder mockBuilder = MockMvcRequestBuilders.get("/licenses/" + customerId + "?summary=AvBTime");
@@ -84,9 +79,6 @@ public class TennisLicenseControllerTest {
 
         // then
         Assert.assertEquals(expectedResponse, responseString);
-
-        // TODO check status
-
     }
 
 }

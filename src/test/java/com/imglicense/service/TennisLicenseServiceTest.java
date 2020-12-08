@@ -1,7 +1,8 @@
-package com.imglicense;
+package com.imglicense.service;
 
 import com.imglicense.repository.TennisLicenseRepository;
 import com.imglicense.service.TennisLicenseService;
+import com.imglicense.utils.TennisLicenseHelper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -12,10 +13,11 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-import static com.imglicense.TennisLicenseHelper.*;
-
+// TODO put in service folder
 @Component
 public class TennisLicenseServiceTest {
+
+    TennisLicenseHelper tlh = new TennisLicenseHelper();
 
     @InjectMocks
     TennisLicenseService tennisLicenseService;
@@ -29,8 +31,8 @@ public class TennisLicenseServiceTest {
         // given
         String customerId = "123";
         MockitoAnnotations.initMocks(this);
-        createTestFileSingleRecord();
-        String expectedResponse = createTestResponseSingleLicense();
+        tlh.createTestFileSingleRecord();
+        String expectedResponse = tlh.createTestResponseSingleLicense();
         Mockito.when(tennisLicenseRepository.getLicense(customerId)).thenReturn(expectedResponse);
 
         // when
@@ -46,8 +48,8 @@ public class TennisLicenseServiceTest {
         // given
         String customerId = "123";
         MockitoAnnotations.initMocks(this);
-        createTestFileSingleRecord();
-        String expectedResponse = createTestResponseSingleLicenseShortSummary();
+        tlh.createTestFileSingleRecord();
+        String expectedResponse = tlh.createTestResponseSingleLicenseShortSummary();
         Mockito.when(tennisLicenseRepository.getLicenseShortSummary(customerId)).thenReturn(expectedResponse);
 
         // when

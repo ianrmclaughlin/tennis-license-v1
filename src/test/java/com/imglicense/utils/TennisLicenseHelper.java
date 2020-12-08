@@ -1,6 +1,7 @@
-package com.imglicense;
+package com.imglicense.utils;
 
 import com.imglicense.utils.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TennisLicenseHelper {
-    public static void createTestFileSingleRecord() throws IOException {
+
+    public void createTestFileSingleRecord() throws IOException {
         TennisDataBuilder tennisDataBuilder = new TennisDataBuilder();
         TennisData tennisData = tennisDataBuilder
                 .withCustomerId("123")
@@ -19,11 +21,11 @@ public class TennisLicenseHelper {
                 .build();
         String fileContent = tennisData.toString();
         byte[] bytes = fileContent.getBytes();
-        Path path = Paths.get("src/main/resources/tennis-data-file.csv"); // TODO remove
+        Path path = Paths.get(getDataFile());
         Files.write(path, bytes);
     }
 
-    public static void createTestFileSingleRecordFuture() throws IOException {
+    public void createTestFileSingleRecordFuture() throws IOException {
         TennisDataBuilder tennisDataBuilder = new TennisDataBuilder();
         TennisData tennisData = tennisDataBuilder
                 .withCustomerId("123")
@@ -34,11 +36,11 @@ public class TennisLicenseHelper {
                 .build();
         String fileContent = tennisData.toString();
         byte[] bytes = fileContent.getBytes();
-        Path path = Paths.get("src/main/resources/tennis-data-file.csv"); // TODO remove
+        Path path = Paths.get(getDataFile());
         Files.write(path, bytes);
     }
 
-    public static String createTestResponseSingleLicense() {
+    public String createTestResponseSingleLicense() {
         JsonLicenseBuilder jsonLicenseBuilder = new JsonLicenseBuilder();
         JsonLicense jsonLicense = jsonLicenseBuilder
                 .withMatchId("111")
@@ -54,7 +56,7 @@ public class TennisLicenseHelper {
         return expectedResponse;
     }
 
-    public static String createTestResponseSingleLicenseShortSummary() {
+    public String createTestResponseSingleLicenseShortSummary() {
         JsonLicenseBuilder jsonLicenseBuilder = new JsonLicenseBuilder();
         JsonLicense jsonLicense = jsonLicenseBuilder
                 .withMatchId("111")
@@ -71,7 +73,7 @@ public class TennisLicenseHelper {
         return expectedResponse;
     }
 
-    public static String createTestResponseSingleLicenseLongSummary() {
+    public String createTestResponseSingleLicenseLongSummary() {
         JsonLicenseBuilder jsonLicenseBuilder = new JsonLicenseBuilder();
         JsonLicense jsonLicense = jsonLicenseBuilder
                 .withMatchId("111")
@@ -87,5 +89,19 @@ public class TennisLicenseHelper {
         String expectedResponse = jsonResponse.toString();
         return expectedResponse;
     }
+
+    @Value("${tennis.datafile}")
+    String dataFile;
+
+    public String getDataFile() {
+        String filename;
+        if (dataFile == null) {
+            filename = "src/main/resources/tennis-data-file.csv";
+        } else {
+            filename = dataFile;
+        }
+        return filename;
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package com.imglicense;
+package com.imglicense.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imglicense.repository.TennisLicenseRepository;
@@ -14,23 +14,27 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
-import static com.imglicense.TennisLicenseHelper.*;
-
 @Component
 public class TennisLicenseRepositoryTest {
+
+// TODO
+//    Note: C:\Users\ian_m\IdeaProjects\tennis-license-v1\src\test\java\com\imglicense\repository\TennisLicenseRepositoryTest.java uses unchecked or unsafe operations.
+//    Note: Recompile with -Xlint:unchecked for details.
+
+    TennisLicenseHelper tlh = new TennisLicenseHelper();
 
     @Test
     public void givenCustomerId_whenGet_thenGetTennisLicense() throws IOException {
 
         // given
-        createTestFileSingleRecord();
+        tlh.createTestFileSingleRecord();
         TennisLicenseRepository tennisLicenseRepository = new TennisLicenseRepository();
 
         // when
         String licenses = tennisLicenseRepository.getLicense("123");
 
         // then
-        String expectedResponse = createTestResponseSingleLicense();
+        String expectedResponse = tlh.createTestResponseSingleLicense();
         ObjectMapper om = new ObjectMapper();
         Assert.assertEquals(om.readTree(expectedResponse), om.readTree(licenses));
     }
@@ -68,7 +72,7 @@ public class TennisLicenseRepositoryTest {
         fileContent += tennisData3.toString();
 
         byte[] bytes = fileContent.getBytes();
-        Path path = Paths.get("src/main/resources/tennis-data-file.csv"); // TODO remove
+        Path path = Paths.get(tlh.getDataFile());
         Files.write(path, bytes);
         TennisLicenseRepository tennisLicenseRepository = new TennisLicenseRepository();
 
@@ -167,7 +171,7 @@ public class TennisLicenseRepositoryTest {
         fileContent += tennisData6.toString();
 
         byte[] bytes = fileContent.getBytes();
-        Path path = Paths.get("src/main/resources/tennis-data-file.csv"); // TODO remove
+        Path path = Paths.get(tlh.getDataFile());
         Files.write(path, bytes);
         TennisLicenseRepository tennisLicenseRepository = new TennisLicenseRepository();
 
@@ -240,14 +244,14 @@ public class TennisLicenseRepositoryTest {
     public void givenShortSummaryRequest_whenGet_thenGetShortSummary() throws IOException {
 
         // given
-        createTestFileSingleRecord();
+        tlh.createTestFileSingleRecord();
         TennisLicenseRepository tennisLicenseRepository = new TennisLicenseRepository();
 
         // when
         String licenses = tennisLicenseRepository.getLicenseShortSummary("123");
 
         // then
-        String expectedResponse = createTestResponseSingleLicenseShortSummary();
+        String expectedResponse = tlh.createTestResponseSingleLicenseShortSummary();
         ObjectMapper om = new ObjectMapper();
         Assert.assertEquals(om.readTree(expectedResponse), om.readTree(licenses));
     }
@@ -256,7 +260,7 @@ public class TennisLicenseRepositoryTest {
     public void givenLongSummaryRequest_whenGet_thenGetLongSummary() throws IOException {
 
         // given
-        createTestFileSingleRecord();
+        tlh.createTestFileSingleRecord();
         TennisLicenseRepository tennisLicenseRepository = new TennisLicenseRepository();
 
         // when
@@ -276,7 +280,7 @@ public class TennisLicenseRepositoryTest {
     public void givenLongSummaryRequest_whenGet_thenGetLongSummaryFuture() throws IOException {
 
         // given
-        createTestFileSingleRecordFuture();
+        tlh.createTestFileSingleRecordFuture();
         TennisLicenseRepository tennisLicenseRepository = new TennisLicenseRepository();
 
         // when

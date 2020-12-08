@@ -35,11 +35,11 @@ public class TennisDataBuilder {
     public TennisData build() {
         // TODO investigate intellij highlighted issues
         TennisData tennisData = new TennisData();
-        tennisData.customerId = customerId;
-        tennisData.matchId = matchId;
-        tennisData.startDate = startDate;
-        tennisData.playerA = playerA;
-        tennisData.playerB = playerB;
+        TennisData.customerId = customerId;
+        TennisData.matchId = matchId;
+        TennisData.startDate = startDate;
+        TennisData.playerA = playerA;
+        TennisData.playerB = playerB;
         return tennisData;
     }
 
