@@ -29,7 +29,7 @@ public class TennisLicenseRepository {
     int START_DATE = 2;
     int PLAYER_A = 3;
     int PLAYER_B = 4;
-    final private String tennisDataFile = "C:\\IanMcLaughlin\\tennis-data-file.csv"; // TODO remove - have as command line param
+    final private String tennisDataFile = "src/main/resources/tennis-data-file.csv"; // TODO remove - have as command line param
 
     public String getLicense(String customerId) throws IOException {
         Path path = Paths.get(tennisDataFile);

@@ -17,7 +17,7 @@ public class TennisLicenseHelper {
                 .build();
         String fileContent = tennisData.toString();
         byte[] bytes = fileContent.getBytes();
-        Path path = Paths.get("C:\\IanMcLaughlin\\tennis-data-file.csv"); // TODO remove
+        Path path = Paths.get("src/main/resources/tennis-data-file.csv"); // TODO remove
         Files.write(path, bytes);
     }
 
@@ -32,7 +32,7 @@ public class TennisLicenseHelper {
                 .build();
         String fileContent = tennisData.toString();
         byte[] bytes = fileContent.getBytes();
-        Path path = Paths.get("C:\\IanMcLaughlin\\tennis-data-file.csv"); // TODO remove
+        Path path = Paths.get("src/main/resources/tennis-data-file.csv"); // TODO remove
         Files.write(path, bytes);
     }
 
